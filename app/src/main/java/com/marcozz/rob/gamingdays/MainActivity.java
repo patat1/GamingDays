@@ -22,7 +22,7 @@ import static com.marcozz.rob.gamingdays.Constants.USERS;
 import static com.marcozz.rob.gamingdays.Constants.TAG;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView name;
+    private TextView name, eventDate, eventTitle;
     private ImageView eventImage;
     private FirebaseAuth auth;
     private DatabaseReference databaseUserReference, databaseEventReference;
@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
         checkIfLogged();
 
         name = findViewById(R.id.name);
-        eventImage = (ImageView) findViewById(R.id.image);
+        eventImage = findViewById(R.id.image);
+        eventDate = findViewById(R.id.date);
+        eventTitle = findViewById(R.id.title);
         updateUserName();
 
         updateEvent();
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 Event event = dataSnapshot.getValue(Event.class);
                 Log.e(TAG, event.title);
                 Picasso.get().load(event.url).into(eventImage);
+                eventDate.setText(event.date);
+                eventTitle.setText(event.title);
             }
 
             @Override
@@ -68,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Log.e(TAG, dataSnapshot.getValue(String.class));
-                    name.setText(dataSnapshot.getValue(String.class));
+                    String msg = dataSnapshot.getValue(String.class) + ", scegli cosa fare!";
+                    name.setText(msg);
                 }
 
                 @Override
