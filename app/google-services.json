@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1013416821622",
+    "firebase_url": "https://gaming-days.firebaseio.com",
+    "project_id": "gaming-days",
+    "storage_bucket": "gaming-days.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013416821622:android:259edfc23ef70ad0",
+        "android_client_info": {
+          "package_name": "com.marcozz.rob.gamingdays"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013416821622-sj1g3ovhpb2kct140bjo8jm98qtfun58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnuE8-3J5QLU9aGKj1pgzR0Be_owZ06yg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

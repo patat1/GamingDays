@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Gaming Days</string>
+    <string name="hint_email">Inserisci una email</string>
+    <string name="hint_password">Inserisci la password</string>
+    <string name="action_log_in">Log In</string>
+    <string name="toast_generic_confirmation">Operazione completata</string>
+    <string name="hint_user">Inserisci un nome per la visualizzaizone</string>
+    <string name="action_register">Registrati</string>
+    <string name="alert_password">La password è troppo corta. Il minimo è 6 caratteri!</string>
+    <string name="toast_generic_error">Si è verificato un errore.</string>
+    <string name="action_logout">Logout</string>
+</resources>
