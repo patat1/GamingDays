@@ -37,6 +37,7 @@ public class EventUpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_update);
 
         auth = FirebaseAuth.getInstance();
+        checkIfLogged();
         databaseEventReference = FirebaseDatabase.getInstance().getReference(EVENT);
 
         eventImage = findViewById(R.id.image);
@@ -46,7 +47,6 @@ public class EventUpdateActivity extends AppCompatActivity {
         eventDescription = findViewById(R.id.description);
         deleteAllCheckBox = findViewById(R.id.delete_all);
 
-        checkIfLogged();
         updateEvent();
     }
 

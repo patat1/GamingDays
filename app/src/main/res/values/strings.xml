@@ -23,4 +23,6 @@
     <string name="hint_description">Descrizione</string>
     <string name="action_edit">Modifica</string>
     <string name="hint_remove_all">Resetta partecipanti</string>
+    <string name="hint_new_message">Scrivi un messaggio</string>
+    <string name="action_chat">Chat</string>
 </resources>

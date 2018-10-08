@@ -99,6 +99,15 @@
             android:textStyle="bold" />
         <Button
             android:layout_weight="1"
+            android:id="@+id/chat_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="openChat"
+            android:text="@string/action_chat"
+            android:textStyle="bold" />
+        <Button
+            android:layout_weight="1"
             android:id="@+id/edit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

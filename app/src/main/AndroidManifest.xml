@@ -26,7 +26,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".EventUpdateActivity"></activity>
+        <activity android:name=".EventUpdateActivity" />
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>

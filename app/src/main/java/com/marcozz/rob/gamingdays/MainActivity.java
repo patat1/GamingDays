@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         auth = FirebaseAuth.getInstance();
+        editButton = findViewById(R.id.edit_button);
+        checkIfLogged();
         databaseUserReference = FirebaseDatabase.getInstance().getReference(USERS);
         databaseEventReference = FirebaseDatabase.getInstance().getReference(EVENT);
 
@@ -53,12 +55,10 @@ public class MainActivity extends AppCompatActivity {
         eventTitle = findViewById(R.id.title);
         eventDescription = findViewById(R.id.description);
         progressBar = findViewById(R.id.progress);
-        editButton = findViewById(R.id.edit_button);
 
         confirmImage = findViewById(R.id.confirm_button);
         notConfirmImage = findViewById(R.id.not_confirm_button);
 
-        checkIfLogged();
         updateUserName();
         updateEvent();
     }
@@ -142,5 +142,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void doCallEdit(View view) {
         startActivity(new Intent(getApplicationContext(), EventUpdateActivity.class));
+    }
+
+    public void openChat(View view) {
+        startActivity(new Intent(getApplicationContext(), ChatActivity.class));
     }
 }
