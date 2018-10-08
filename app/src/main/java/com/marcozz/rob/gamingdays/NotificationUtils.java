@@ -37,9 +37,8 @@ public class NotificationUtils {
         if (TextUtils.isEmpty(message))
             return;
 
-
         // notification icon
-        final int icon = R.mipmap.ic_launcher;
+        final int icon = R.drawable.ic_notification;
 
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         final PendingIntent resultPendingIntent =
@@ -54,10 +53,10 @@ public class NotificationUtils {
                 mContext);
 
 
-        showSmallNotification(mBuilder, icon, title, message, timeStamp, resultPendingIntent);
+        showNotification(mBuilder, icon, title, message, timeStamp, resultPendingIntent);
     }
 
-    private void showSmallNotification(NotificationCompat.Builder mBuilder, int icon, String title, String message, String timeStamp, PendingIntent resultPendingIntent) {
+    private void showNotification(NotificationCompat.Builder mBuilder, int icon, String title, String message, String timeStamp, PendingIntent resultPendingIntent) {
 
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
 
@@ -70,7 +69,7 @@ public class NotificationUtils {
                 .setContentIntent(resultPendingIntent)
                 .setStyle(inboxStyle)
                 .setWhen(getTimeMilliSec(timeStamp))
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_notification)
                 .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), icon))
                 .setContentText(message)
                 .build();
