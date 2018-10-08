@@ -10,7 +10,7 @@ public class Event {
     public String date;
     public String title;
     public String url;
-    public ArrayList <String> confirmed;
+    public ArrayList <String> confirmed = new ArrayList<>();
 
     // Default constructor required for calls to
     // DataSnapshot.getValue(User.class)
@@ -21,6 +21,19 @@ public class Event {
         this.date = date;
         this.title = title;
         this.url = url;
-        this.confirmed = confirmed;
+        if (confirmed!=null)
+            this.confirmed = confirmed;
+        else
+            this.confirmed = new ArrayList<>();
+    }
+
+    public String listPeople() {
+        StringBuilder list = new StringBuilder();
+        list.append("Lista di chi ha già confermato:\n");
+        for (String item: confirmed) {
+            list.append("- ").append(item).append("\n");
+        }
+
+        return list.toString();
     }
 }

@@ -9,7 +9,12 @@
     <string name="alert_password">La password è troppo corta. Il minimo è 6 caratteri!</string>
     <string name="toast_generic_error">Si è verificato un errore.</string>
     <string name="action_logout">Logout</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="action_confirm">Ci sarò!</string>
-    <string name="action_not_confirm">Non ci posso essere...</string>
+    <string name="action_not_confirm">Non ci posso essere…</string>
+    <string name="no_one">Conferma la tua presenza per primo!</string>
+    <string name="confirm_thankyou">Grazie per aver confermato la tua presenza!</string>
+    <string name="confirm_goodbye">È un peccato che tu non ci sia…</string>
+    <string name="confirm_already_confirmed">Hai già dato conferma di partecipazione</string>
+    <string name="confirm_already_not_confirmed">Hai già dato conferma di non partecipazione</string>
 </resources>

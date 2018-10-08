@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,12 +26,13 @@ import static com.marcozz.rob.gamingdays.Constants.USERS;
 import static com.marcozz.rob.gamingdays.Constants.TAG;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView name, eventDate, eventTitle;
-    private ImageView eventImage;
+    private TextView name, confirmedList, eventDate, eventTitle;
+    private ImageView eventImage, confirmImage, notConfirmImage;
     private FirebaseAuth auth;
     private DatabaseReference databaseUserReference, databaseEventReference;
     private Event event;
     private String currentUserName;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +46,16 @@ public class MainActivity extends AppCompatActivity {
         checkIfLogged();
 
         name = findViewById(R.id.name);
+        confirmedList = findViewById(R.id.confirmed_list);
         eventImage = findViewById(R.id.image);
         eventDate = findViewById(R.id.date);
         eventTitle = findViewById(R.id.title);
-        updateUserName();
+        progressBar = findViewById(R.id.progress);
 
+        confirmImage = findViewById(R.id.confirm_button);
+        notConfirmImage = findViewById(R.id.not_confirm_button);
+
+        updateUserName();
         updateEvent();
     }
 
@@ -60,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
                 Picasso.get().load(event.url).into(eventImage);
                 eventDate.setText(event.date);
                 eventTitle.setText(event.title);
+                if (event.confirmed.size() == 0)
+                    confirmedList.setText(R.string.no_one);
+                else
+                    confirmedList.setText(event.listPeople());
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -103,20 +116,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doConfirm(View view) {
-        if (event.confirmed == null)
-            event.confirmed = new ArrayList<>();
         if (!event.confirmed.contains(currentUserName)) {
             event.confirmed.add(currentUserName);
             databaseEventReference.setValue(event);
-        }
+            Toast.makeText(this, R.string.confirm_thankyou, Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(this, R.string.confirm_already_confirmed, Toast.LENGTH_SHORT).show();
     }
 
     public void doNotConfirm(View view) {
-        if (event.confirmed == null)
-            event.confirmed = new ArrayList<>();
         if (event.confirmed.contains(currentUserName)) {
             event.confirmed.remove(currentUserName);
             databaseEventReference.setValue(event);
-        }
+            Toast.makeText(this, R.string.confirm_goodbye, Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(this, R.string.confirm_already_not_confirmed, Toast.LENGTH_SHORT).show();
     }
 }
