@@ -17,6 +17,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.marcozz.rob.gamingdays.objects.Event;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 import static com.marcozz.rob.gamingdays.Constants.EVENT;
 import static com.marcozz.rob.gamingdays.Constants.USERS;
 import static com.marcozz.rob.gamingdays.Constants.TAG;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView eventImage;
     private FirebaseAuth auth;
     private DatabaseReference databaseUserReference, databaseEventReference;
+    private Event event;
+    private String currentUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         databaseEventReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Event event = dataSnapshot.getValue(Event.class);
+                event = dataSnapshot.getValue(Event.class);
                 Log.e(TAG, event.title);
                 Picasso.get().load(event.url).into(eventImage);
                 eventDate.setText(event.date);
@@ -71,8 +75,9 @@ public class MainActivity extends AppCompatActivity {
             databaseUserReference.child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    Log.e(TAG, dataSnapshot.getValue(String.class));
-                    String msg = dataSnapshot.getValue(String.class) + ", scegli cosa fare!";
+                    currentUserName = dataSnapshot.getValue(String.class);
+                    Log.e(TAG, currentUserName);
+                    String msg = currentUserName + ", scegli cosa fare!";
                     name.setText(msg);
                 }
 
@@ -95,5 +100,23 @@ public class MainActivity extends AppCompatActivity {
     public void doLogout(View view) {
         auth.signOut();
         checkIfLogged();
+    }
+
+    public void doConfirm(View view) {
+        if (event.confirmed == null)
+            event.confirmed = new ArrayList<>();
+        if (!event.confirmed.contains(currentUserName)) {
+            event.confirmed.add(currentUserName);
+            databaseEventReference.setValue(event);
+        }
+    }
+
+    public void doNotConfirm(View view) {
+        if (event.confirmed == null)
+            event.confirmed = new ArrayList<>();
+        if (event.confirmed.contains(currentUserName)) {
+            event.confirmed.remove(currentUserName);
+            databaseEventReference.setValue(event);
+        }
     }
 }
