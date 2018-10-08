@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventUpdateActivity">
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_date"/>
+    <EditText
+        android:layout_below="@+id/date"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_title"/>
+
+    <EditText
+        android:layout_below="@+id/title"
+        android:id="@+id/image_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_image_url"/>
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/image_url"
+        android:layout_marginStart="?android:attr/listPreferredItemPaddingEnd"
+        android:layout_marginEnd="?android:attr/listPreferredItemPaddingRight"
+        android:onClick="reloadImage" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image"
+        android:hint="@string/hint_description"/>
+
+    <CheckBox
+        android:id="@+id/delete_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description"
+        android:text="@string/hint_remove_all"/>
+
+    <ImageView
+        android:id="@+id/confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="@android:dimen/app_icon_size"
+        android:layout_below="@+id/delete_all"
+        android:layout_margin="?android:attr/listPreferredItemPaddingEnd"
+        android:onClick="doConfirm"
+        android:src="@drawable/thumb_up" />
+
+</RelativeLayout>

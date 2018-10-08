@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,18 +22,20 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static com.marcozz.rob.gamingdays.Constants.ADMIN_UID;
 import static com.marcozz.rob.gamingdays.Constants.EVENT;
 import static com.marcozz.rob.gamingdays.Constants.USERS;
 import static com.marcozz.rob.gamingdays.Constants.TAG;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView name, confirmedList, eventDate, eventTitle;
+    private TextView name, confirmedList, eventDate, eventTitle, eventDescription;
     private ImageView eventImage, confirmImage, notConfirmImage;
     private FirebaseAuth auth;
     private DatabaseReference databaseUserReference, databaseEventReference;
     private Event event;
     private String currentUserName;
     private ProgressBar progressBar;
+    private Button editButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +46,19 @@ public class MainActivity extends AppCompatActivity {
         databaseUserReference = FirebaseDatabase.getInstance().getReference(USERS);
         databaseEventReference = FirebaseDatabase.getInstance().getReference(EVENT);
 
-        checkIfLogged();
-
         name = findViewById(R.id.name);
         confirmedList = findViewById(R.id.confirmed_list);
         eventImage = findViewById(R.id.image);
         eventDate = findViewById(R.id.date);
         eventTitle = findViewById(R.id.title);
+        eventDescription = findViewById(R.id.description);
         progressBar = findViewById(R.id.progress);
+        editButton = findViewById(R.id.edit_button);
 
         confirmImage = findViewById(R.id.confirm_button);
         notConfirmImage = findViewById(R.id.not_confirm_button);
 
+        checkIfLogged();
         updateUserName();
         updateEvent();
     }
@@ -65,9 +69,11 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 event = dataSnapshot.getValue(Event.class);
                 Log.e(TAG, event.title);
-                Picasso.get().load(event.url).into(eventImage);
+                Picasso.get().load(event.url).fit().centerCrop().into(eventImage);
                 eventDate.setText(event.date);
                 eventTitle.setText(event.title);
+                eventDescription.setText(event.description);
+
                 if (event.confirmed.size() == 0)
                     confirmedList.setText(R.string.no_one);
                 else
@@ -107,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
         if (auth.getCurrentUser() == null) {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
-        }
+        } else if (auth.getUid().equals(ADMIN_UID))
+            editButton.setVisibility(View.VISIBLE);
     }
 
     public void doLogout(View view) {
@@ -131,5 +138,9 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.confirm_goodbye, Toast.LENGTH_SHORT).show();
         } else
             Toast.makeText(this, R.string.confirm_already_not_confirmed, Toast.LENGTH_SHORT).show();
+    }
+
+    public void doCallEdit(View view) {
+        startActivity(new Intent(getApplicationContext(), EventUpdateActivity.class));
     }
 }

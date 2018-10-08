@@ -18,12 +18,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".RegisterActivity" />
+
         <service android:name=".service.NotificationService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".EventUpdateActivity"></activity>
     </application>
 
 </manifest>

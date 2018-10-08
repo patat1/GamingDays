@@ -17,4 +17,10 @@
     <string name="confirm_goodbye">È un peccato che tu non ci sia…</string>
     <string name="confirm_already_confirmed">Hai già dato conferma di partecipazione</string>
     <string name="confirm_already_not_confirmed">Hai già dato conferma di non partecipazione</string>
+    <string name="hint_date">Data</string>
+    <string name="hint_title">Titolo evento</string>
+    <string name="hint_image_url">URL dell\'immagine</string>
+    <string name="hint_description">Descrizione</string>
+    <string name="action_edit">Modifica</string>
+    <string name="hint_remove_all">Resetta partecipanti</string>
 </resources>

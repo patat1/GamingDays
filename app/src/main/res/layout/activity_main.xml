@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,13 +26,25 @@
         android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_marginStart="?android:attr/listPreferredItemPaddingEnd"
+        android:layout_marginEnd="?android:attr/listPreferredItemPaddingRight"
         android:id="@+id/image"/>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image"
+        android:layout_marginTop="?android:attr/listPreferredItemPaddingEnd"
+        android:text="@string/loading"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.Material.Body1" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/image"
+        android:layout_below="@+id/description"
         android:layout_marginTop="?android:attr/listPreferredItemPaddingEnd"
         android:text="@string/loading"
         android:textAppearance="@android:style/TextAppearance.Material.Body1" />
@@ -71,16 +82,32 @@
         android:text="@string/no_one"
         android:textAppearance="@android:style/TextAppearance.Material.Body2" />
 
-    <Button
+    <LinearLayout
         android:layout_alignParentBottom="true"
-        android:id="@+id/logout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="16dp"
-        android:onClick="doLogout"
-        android:text="@string/action_logout"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:layout_gravity="bottom">
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="doLogout"
+            android:text="@string/action_logout"
+            android:textStyle="bold" />
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/edit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="doCallEdit"
+            android:text="@string/action_edit"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progress"
